@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jinsong Lai | Portfolio</title>
+  <style>
+    :root {
+      --text: #1f2328;
+      --muted: #57606a;
+      --border: #d0d7de;
+      --bg-soft: #f6f8fa;
+      --link: #0969da;
+      --card: #ffffff;
+      --shadow: 0 2px 8px rgba(31, 35, 40, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: #fff;
+      line-height: 1.55;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .contact {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .contact a {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    .contact a:hover { text-decoration: underline; }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 20px 0 28px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 1.25rem;
+    }
+
+    .project {
+      display: grid;
+      grid-template-columns: 1.75fr 1fr;
+      gap: 18px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .project h3 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+      line-height: 1.35;
+    }
+
+    .project p {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+    }
+
+    .label {
+      font-weight: 600;
+    }
+
+    .tech {
+      color: var(--muted);
+    }
+
+    .links a {
+      color: var(--link);
+      text-decoration: none;
+      margin-right: 10px;
+      white-space: nowrap;
+    }
+
+    .links a:hover { text-decoration: underline; }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      align-content: start;
+    }
+
+    .thumb {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      cursor: zoom-in;
+      background: var(--bg-soft);
+      transition: transform 0.12s ease;
+    }
+
+    .thumb:hover {
+      transform: translateY(-1px);
+    }
+
+    .notes {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 18px;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox-content {
+      position: relative;
+      width: min(1100px, 100%);
+      height: min(88vh, 760px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 10px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+      background: #fff;
+    }
+
+    .lb-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: rgba(255,255,255,0.92);
+      color: #111;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 20px;
+      line-height: 1;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .lb-prev { left: 10px; }
+    .lb-next { right: 10px; }
+
+    .lb-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      border: none;
+      background: rgba(255,255,255,0.92);
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .lb-caption {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -34px;
+      color: #eaeef2;
+      font-size: 0.9rem;
+      text-align: center;
+      width: 100%;
+      padding: 0 50px;
+    }
+
+    @media (max-width: 780px) {
+      .project {
+        grid-template-columns: 1fr;
+      }
+      .gallery {
+        grid-template-columns: 1fr 1fr;
+      }
+      .lightbox-content {
+        height: min(78vh, 560px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Jinsong Lai</h1>
+    <div class="subtitle">
+      M.Sc. Informatik (TU Dresden) · Focus: HCI, Computer Vision, Backend Software Development
+    </div>
+
+    <div class="contact">
+      <a href="./assets/Jinsong_Lai_CV.pdf"><strong>CV (PDF)</strong></a> ·
+      <a href="https://github.com/jinsonglai"><strong>GitHub</strong></a> ·
+      <a href="LINKEDIN_LINK_HERE"><strong>LinkedIn</strong></a> ·
+      <a href="mailto:jinsong.lai@icloud.com"><strong>Email</strong></a>
+    </div>
+
+    <hr />
+
+    <h2>Selected Projects</h2>
+
+    <!-- Master Thesis -->
+    <section class="project">
+      <div>
+        <h3>Master Thesis — Multimodal Spatial Arithmetic with Tangibles</h3>
+        <p>
+          A multimodal learning and interaction system that supports spreadsheet-style arithmetic for blind and visually impaired users through a tactile grid, Braille-labeled tangibles, speech interaction, and camera-based tracking.
+        </p>
+        <p><span class="label">My role:</span> I designed and implemented the prototype end-to-end, including the tangible interaction concept, computer-vision modules (grid detection, tangible recognition, hand tracking), arithmetic logic, speech input/output integration, and an initial user evaluation for usability and learning support.</p>
+        <p class="tech"><span class="label">Tech stack:</span> Python · MediaPipe · OpenCV · Raspberry Pi · ASR · Piper TTS · Multimodal Interaction</p>
+        <p class="links">
+          <span class="label">Links:</span>
+          <a href="REPO_LINK_THESIS">Repository</a>
+          <a href="DEMO_SLIDES_LINK_THESIS">Demo + Slides</a>
+          <a href="PAPER_LINK_THESIS">ICCHP Submission / Paper</a>
+        </p>
+      </div>
+      <div class="gallery" data-gallery="thesis">
+        <img class="thumb" src="./assets/images/thesis-1.png" alt="Thesis system overview" data-caption="Master Thesis · System Overview">
+        <img class="thumb" src="./assets/images/thesis-2.png" alt="Thesis prototype setup" data-caption="Master Thesis · Prototype Setup">
+      </div>
+    </section>
+
+    <!-- MultiSense -->
+    <section class="project">
+      <div>
+        <h3>MultiSense Dashboard — Accessible Real-Time Monitoring</h3>
+        <p>
+          A multimodal dashboard for blind and visually impaired users to monitor real-time sensor data via speech and sonification, with Kafka-based streaming and screen-reader-compatible interaction.
+        </p>
+        <p><span class="label">My role:</span> I was mainly responsible for frontend page development, page configuration logic, and dashboard display logic, including UI implementation, configuration workflows, and real-time data integration with backend services.</p>
+        <p class="tech"><span class="label">Tech stack:</span> Vue.js · Spring Boot · Apache Kafka · WebSocket (STOMP/SockJS) · Web Audio API · SpeechSynthesis · ARIA</p>
+        <p class="links">
+          <span class="label">Links:</span>
+          <a href="REPO_LINK_MULTISENSE">Repository</a>
+          <a href="DEMO_SLIDES_LINK_MULTISENSE">Demo + Slides</a>
+        </p>
+      </div>
+      <div class="gallery" data-gallery="multisense">
+        <img class="thumb" src="./assets/images/multisense-1.png" alt="MultiSense dashboard UI" data-caption="MultiSense Dashboard · Main Interface">
+        <img class="thumb" src="./assets/images/multisense-2.png" alt="MultiSense configuration UI" data-caption="MultiSense Dashboard · Configuration View">
+      </div>
+    </section>
+
+    <!-- Smart ANC -->
+    <section class="project">
+      <div>
+        <h3>Smart ANC — Adaptive Noise Masking</h3>
+        <p>
+          A smart headphone support system for autistic users in office environments, combining ANC control, ambient sound monitoring, and adaptive masking noise to reduce distracting sounds such as speech and background noise.
+        </p>
+        <p><span class="label">My role:</span> I was mainly responsible for the ambient noise masking module, including masking strategy research and real-time masking-noise generation/adaptation based on detected sound types (for example voice vs. non-voice), with a focus on smooth transitions and reduced distraction.</p>
+        <p class="tech"><span class="label">Tech stack:</span> Python · Django · SQLite · WebSocket · OpenAPI · PyTorch · Silero VAD/STT · NumPy · torchaudio</p>
+        <p class="links">
+          <span class="label">Links:</span>
+          <a href="REPO_LINK_ANC">Repository</a>
+          <a href="DEMO_SLIDES_LINK_ANC">Demo + Slides</a>
+        </p>
+      </div>
+      <div class="gallery" data-gallery="anc">
+        <img class="thumb" src="./assets/images/anc-1.png" alt="Smart ANC sensor configuration" data-caption="Smart ANC · Sensor Configuration">
+        <img class="thumb" src="./assets/images/anc-2.png" alt="Smart ANC dashboard" data-caption="Smart ANC · Dashboard">
+      </div>
+    </section>
+
+    <hr />
+
+    <div class="notes">
+      <strong>Notes:</strong> Full reports, slides, and demo materials are linked in each project section. Some original project code and documents were developed in university-internal repositories; public repositories are provided as portfolio versions for review.
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <div class="lightbox-content">
+      <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+      <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous image">‹</button>
+      <img id="lbImage" src="" alt="">
+      <button class="lb-btn lb-next" id="lbNext" aria-label="Next image">›</button>
+      <div class="lb-caption" id="lbCaption"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const lightbox = document.getElementById('lightbox');
+      const lbImage = document.getElementById('lbImage');
+      const lbCaption = document.getElementById('lbCaption');
+      const lbClose = document.getElementById('lbClose');
+      const lbPrev = document.getElementById('lbPrev');
+      const lbNext = document.getElementById('lbNext');
+
+      let currentGallery = [];
+      let currentIndex = 0;
+
+      function openLightbox(images, index) {
+        currentGallery = images;
+        currentIndex = index;
+        updateImage();
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      function updateImage() {
+        const item = currentGallery[currentIndex];
+        lbImage.src = item.src;
+        lbImage.alt = item.alt || '';
+        lbCaption.textContent = item.caption || '';
+      }
+
+      function showPrev() {
+        currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+        updateImage();
+      }
+
+      function showNext() {
+        currentIndex = (currentIndex + 1) % currentGallery.length;
+        updateImage();
+      }
+
+      document.querySelectorAll('.gallery').forEach(galleryEl => {
+        const thumbs = Array.from(galleryEl.querySelectorAll('.thumb'));
+        const galleryImages = thumbs.map(img => ({
+          src: img.getAttribute('src'),
+          alt: img.getAttribute('alt'),
+          caption: img.dataset.caption || ''
+        }));
+
+        thumbs.forEach((img, idx) => {
+          img.addEventListener('click', () => openLightbox(galleryImages, idx));
+        });
+      });
+
+      lbClose.addEventListener('click', closeLightbox);
+      lbPrev.addEventListener('click', showPrev);
+      lbNext.addEventListener('click', showNext);
+
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') showPrev();
+        if (e.key === 'ArrowRight') showNext();
+      });
+    })();
+  </script>
+</body>
+</html>
